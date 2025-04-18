@@ -14,50 +14,34 @@ This script is compatible with **macOS** and **Windows** and supports **drag-and
 
 ## 🚀 Installation
 
-### 1. Install `pipx` (if not already installed)
+### 1. Install **uv** globally *(one‑time)*
 
 **macOS (via Homebrew):**
 ```bash
-brew install pipx
-pipx ensurepath
-
-Windows (via Python):
-
-python -m pip install --user pipx
-python -m pipx ensurepath
+python3 -m pip install --user uv
+```
+**Windows (via Python):**
+```
+py -m pip install --user uv
+```
 
 Restart your terminal afterward.
 
-2. Install uv using pipx
-
-pipx install uv
-
-3. Set up the environment and install dependencies
-
-uv venv
-uv pip install PyPDF2
-
-⚡ Usage
-
-Option A: Interactive Mode
-
+### 2. Create a project‑local virtual environment and install dependencies
+```
+uv venv .venv                 # creates .venv in the repo root
+uv pip install PyPDF2         # super‑fast resolver & installer
+# (or: uv pip install -r requirements.txt when you add one)
+```
+### 3. Run the tool
+```
 uv venv run python reorder_pdf.py
-
-You will be prompted:
-
-Enter the full path of the scanned PDF file:
-
-Drag the PDF into the terminal window (macOS or Windows), then press Enter.
-
-Output:
-
-A new file will be saved in the same folder with _reordered added to its name:
-
-Original:  /Users/peter/Downloads/Report.pdf
-Reordered: /Users/peter/Downloads/Report_reordered.pdf
 ```
 
-🤔 How It Works
+`uv venv run …` executes the command inside the virtual environment, so you never have to activate/deactivate manually.
+When prompted, drag the scanned PDF into the terminal and press Enter
+
+### 🤔 How It Works
 
 If a PDF is scanned odd-pages first (1, 3, 5…) followed by even-pages (2, 4, 6…), the pages appear out of order.
 
